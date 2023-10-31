@@ -34,5 +34,7 @@ public class WebDriverSiteSteps {
         AddRecordPage addPage = new AddRecordPage(driver);
         String bodyText = addPage.getBodyText();
         assertThat(bodyText, containsString("User is Logged in"));
+
+        //Check syncing
     }
 }
