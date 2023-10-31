@@ -36,5 +36,7 @@ public class WebDriverSiteSteps {
         assertThat(bodyText, containsString("User is Logged in"));
 
         //Check syncing
+
+        //Check ci
     }
 }
