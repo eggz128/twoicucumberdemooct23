@@ -1,3 +1,4 @@
+@GUI
 Feature: WebDriver2 site security
 
   Scenario: I can log in with a valid username and password

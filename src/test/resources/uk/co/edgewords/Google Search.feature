@@ -1,4 +1,4 @@
-@RunThis
+@RunThis @GUI
 Feature: Google Search
 
 

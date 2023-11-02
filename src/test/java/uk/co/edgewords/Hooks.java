@@ -2,10 +2,15 @@ package uk.co.edgewords;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.requestSpecification;
 
 public class Hooks {
     //This class will be instantiated first as the @Before is needed first to run a scenario
@@ -19,10 +24,10 @@ public class Hooks {
     }
 
 
-    @Before
+    @Before("@GUI")
     public void setUp(){
         String browser = System.getProperty("BROWSER");
-        //String browser = "chrome";
+        browser = "firefox";
         if(browser==null){browser="";}
         switch (browser){
             case"chrome":
@@ -50,9 +55,19 @@ public class Hooks {
 //        driver = new FirefoxDriver();
 //    }
 
-    @After
+    @After("@GUI")
     public void tearDown() throws InterruptedException {
         Thread.sleep(3000);
         driver.quit();
+    }
+
+    @Before("@API")
+    public void setUpAPI(){
+        RequestSpecification spec = given();
+        spec.baseUri("http://localhost:2002");
+        spec.contentType(ContentType.JSON);
+
+        requestSpecification = spec;
+
     }
 }
